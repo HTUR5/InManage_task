@@ -6,7 +6,6 @@ require 'classes/Post.php';
 
 require 'config.php';
 
-var_dump($_POST);
 $db = new Database(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 $conn = $db->getConn();
 

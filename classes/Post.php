@@ -52,6 +52,29 @@ class Post
     public $errors = [];
 
     /**
+     * Get a page of articles
+     *
+     * @param object $conn Connection to the database
+     * @param integer $limit Number of records to return
+     * @param integer $offset Number of records to skip
+     *
+     * @return array An associative array of the page of article records
+     */
+    public static function getByActiveUser($conn)
+    {
+        $sql = "SELECT posts.*, users.user_name
+        FROM posts
+        JOIN users
+        ON posts.user_id = users.id
+        WHERE users.active = 'yes';";
+
+        $results = $conn->query($sql);
+
+        return $results->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    /**
      * Get all the posts
      *
      * @param object $conn Connection to the database
