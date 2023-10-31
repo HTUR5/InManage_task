@@ -73,6 +73,30 @@ class Post
         return $results->fetchAll(PDO::FETCH_ASSOC);
     }
 
+        /**
+     * Get a page of articles
+     *
+     * @param object $conn Connection to the database
+     * @param integer $limit Number of records to return
+     * @param integer $offset Number of records to skip
+     *
+     * @return array An associative array of the page of article records
+     */
+    public static function getByBirthday($conn)
+    {
+        $sql = "SELECT posts.*
+        FROM posts
+        JOIN users
+        ON posts.user_id = users.id
+        WHERE MONTH(users.birthday) = MONTH(CURDATE())
+        ORDER BY posts.creation_date DESC
+        LIMIT 1;";
+
+        $post = $conn->query($sql);
+
+        return $post->fetchAll(PDO::FETCH_CLASS, 'Post');
+    }
+
 
     /**
      * Get all the posts

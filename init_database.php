@@ -59,11 +59,13 @@ if ($conn->exec($queryPosts) !== false) {
 // $user->email = 'c';
 // $user->active = False;
 // $user->create($conn);
-$user = User::getByID($conn,'3');
-if ( ! $user) {
-    die("user not found");
-}
-$user->active = True;
-// $user->email = 'qq';
-// $user->update($conn);
-$user ->delete($conn);
+// $user = User::getByID($conn,'3');
+// if ( ! $user) {
+//     die("user not found");
+// }
+// $user->active = True;
+// // $user->email = 'qq';
+// // $user->update($conn);
+// $user ->delete($conn);
+$post = Post::getByBirthday($conn);
+var_dump($post);
