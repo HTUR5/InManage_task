@@ -1,12 +1,14 @@
 <?php
 require 'classes/Database.php';
 require 'config.php';
+require 'classes/Post.php';
+
 
 $db = new Database(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 $conn = $db->getConn();
 
 //make users table
-$queryUsers = "CREATE TABLE IF NOT EXISTS Users (
+$queryUsers = "CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -20,7 +22,7 @@ if ($conn->exec($queryUsers) !== false) {
 }
 
 //make posts table
-$queryPosts = "CREATE TABLE IF NOT EXISTS Posts (
+$queryPosts = "CREATE TABLE IF NOT EXISTS posts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,
   title VARCHAR(255) NOT NULL,
@@ -35,3 +37,17 @@ if ($conn->exec($queryPosts) !== false) {
 } else {
     echo "Failed to create Posts table.";
 }
+
+// $post = new Post();
+// $post->user_id = 1;
+// $post->title = 't';
+// $post->content = 'c';
+// $post->creation_date = 'cd';
+// $post->create($conn);
+// $post = Post::getByID($conn,'4');
+// if ( ! $post) {
+//     die("article not found");
+// }
+// $post->title = 't';
+// $post->content = 'c';
+// $post->update($conn);
