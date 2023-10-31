@@ -106,7 +106,7 @@ class Post
      */
     public function update($conn)
     {
-        if ($this->validate()) {
+       // if ($this->validate()) {
             $sql = "UPDATE posts
                     SET title = :title,
                         content = :content,
@@ -122,9 +122,9 @@ class Post
 
             return $stmt->execute();
 
-        } else {
-            return false;
-        }
+        // } else {
+        //     return false;
+        // }
     }
 
     // /**
