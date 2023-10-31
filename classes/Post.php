@@ -94,7 +94,7 @@ class Post
 
         $post = $conn->query($sql);
 
-        return $post->fetchAll(PDO::FETCH_CLASS, 'Post');
+        return $post->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

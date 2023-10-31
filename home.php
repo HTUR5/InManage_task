@@ -54,6 +54,12 @@ $postOfActiveUser = Post::getByActiveUser($conn);
     <nav>
         <ul>                
             <li><a href="/index.php/">Admin</a></li>
+            <?php
+            $post = Post::getByBirthday($conn);
+            ?>
+            <li><a href="post.php?id=<?= $post[0]['id']; ?>">get the last post of user who have birthay this month</a></h2>
+            <li><a href="statistics.php">Get statistics</a></h2>
+
         </ul>
     </nav>
 
