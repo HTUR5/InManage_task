@@ -2,6 +2,8 @@
 require 'classes/Database.php';
 require 'config.php';
 require 'classes/Post.php';
+require 'classes/User.php';
+
 
 
 $db = new Database(DB_HOST, DB_NAME, DB_USER, DB_PASS);
@@ -10,7 +12,7 @@ $conn = $db->getConn();
 //make users table
 $queryUsers = "CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   active ENUM('yes', 'no') DEFAULT 'yes'
 );";
@@ -51,3 +53,17 @@ if ($conn->exec($queryPosts) !== false) {
 // $post->title = 't';
 // $post->content = 'c';
 // $post->update($conn);
+
+// $user = new User();
+// $user->user_name = 't';
+// $user->email = 'c';
+// $user->active = False;
+// $user->create($conn);
+$user = User::getByID($conn,'3');
+if ( ! $user) {
+    die("user not found");
+}
+$user->active = True;
+// $user->email = 'qq';
+// $user->update($conn);
+$user ->delete($conn);
