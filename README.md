@@ -23,3 +23,7 @@ I would like to do the user side as well. In this project I only referred to the
 In addition, I would like to add features to a more convenient interface for the admin and the user. <br>
 
 ![ezgif com-video-to-gif](https://github.com/HTUR5/InManage_task/assets/93159244/3124ebda-e16d-41b7-a0d7-f58f6b7c36b0)
+
+![ezgif com-video-to-gif (1)](https://github.com/HTUR5/InManage_task/assets/93159244/245189ef-7ace-464f-8469-2c86515c4f36)
+
+<img width="474" alt="‏‏לכידה" src="https://github.com/HTUR5/InManage_task/assets/93159244/d9c9ab79-c45c-4179-a365-0bb6bbef118e">
