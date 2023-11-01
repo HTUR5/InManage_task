@@ -20,4 +20,6 @@ q7 is in statistics.php <br>
 
 <h1>for future work: </h1><br>
 I would like to do the user side as well. In this project I only referred to the admin's interface.<br>
-In addition, I would like to add features to a more convenient interface for the admin and the user.
+In addition, I would like to add features to a more convenient interface for the admin and the user. <br>
+
+![ezgif com-video-to-gif](https://github.com/HTUR5/InManage_task/assets/93159244/3124ebda-e16d-41b7-a0d7-f58f6b7c36b0)
