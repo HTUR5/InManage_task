@@ -26,4 +26,4 @@ In addition, I would like to add features to a more convenient interface for the
 
 ![ezgif com-video-to-gif (1)](https://github.com/HTUR5/InManage_task/assets/93159244/245189ef-7ace-464f-8469-2c86515c4f36)
 
-<img width="474" alt="‏‏לכידה" src="https://github.com/HTUR5/InManage_task/assets/93159244/d9c9ab79-c45c-4179-a365-0bb6bbef118e">
+<img width="467" alt="‏‏לכידה" src="https://github.com/HTUR5/InManage_task/assets/93159244/d4c72ad4-d08c-46fa-ad93-39362dc3d9ad">
