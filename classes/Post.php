@@ -46,19 +46,11 @@ class Post
     public $active;
 
     /**
-     * Validation errors
-     * @var array
-     */
-    public $errors = [];
-
-    /**
-     * Get a page of articles
+     * Get a page of post of active users
      *
      * @param object $conn Connection to the database
-     * @param integer $limit Number of records to return
-     * @param integer $offset Number of records to skip
      *
-     * @return array An associative array of the page of article records
+     * @return array An associative array of the page of posts records
      */
     public static function getByActiveUser($conn)
     {
@@ -73,14 +65,12 @@ class Post
         return $results->fetchAll(PDO::FETCH_ASSOC);
     }
 
-        /**
-     * Get a page of articles
+    /**
+     * Get the last post of a user who have birthday this month
      *
      * @param object $conn Connection to the database
-     * @param integer $limit Number of records to return
-     * @param integer $offset Number of records to skip
      *
-     * @return array An associative array of the page of article records
+     * @return mixed An object of this class, or null if not found
      */
     public static function getByBirthday($conn)
     {
@@ -153,9 +143,10 @@ class Post
      */
     public function update($conn)
     {
-       // if ($this->validate()) {
             $sql = "UPDATE posts
                     SET title = :title,
+                        user_id = :user_id,
+                        creation_date = :creation_date,
                         content = :content,
                         active = :active
                     WHERE id = :id";
@@ -163,53 +154,18 @@ class Post
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $stmt->bindValue(':active', $this->active, PDO::PARAM_BOOL);
+            $stmt->bindValue(':active', $this->active, PDO::PARAM_STR);
             $stmt->bindValue(':title', $this->title, PDO::PARAM_STR);
             $stmt->bindValue(':content', $this->content, PDO::PARAM_STR);
+            $stmt->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':creation_date', $this->creation_date, PDO::PARAM_STR);
 
             return $stmt->execute();
 
-        // } else {
-        //     return false;
-        // }
     }
 
     // /**
-    //  * Validate the properties, putting any validation error messages in the $errors property
-    //  *
-    //  * @return boolean True if the current properties are valid, false otherwise
-    //  */
-    protected function validate()
-    {
-        if ($this->title == '') {
-            $this->errors[] = 'Title is required';
-        }
-        if ($this->content == '') {
-            $this->errors[] = 'Content is required';
-        }
-
-        if ($this->creation_date != '') {
-            $date_time = date_create_from_format('Y-m-d H:i:s', $this->creation_date);
-            
-            if ($date_time === false) {
-
-                $this->errors[] = 'Invalid date and time';
-
-            } else {
-
-                $date_errors = date_get_last_errors();
-
-                if ($date_errors['warning_count'] > 0) {
-                    $this->errors[] = 'Invalid date and time';
-                }
-            }
-        }
-
-        return empty($this->errors);
-    }
-
-    // /**
-    //  * Delete the current article
+    //  * Delete the current post
     //  *
     //  * @param object $conn Connection to the database
     //  *
@@ -228,7 +184,7 @@ class Post
     }
 
     /**
-     * Insert a new article with its current property values
+     * Insert a new post with its current property values
      *
      * @param object $conn Connection to the database
      *
@@ -236,8 +192,6 @@ class Post
      */
     public function create($conn)
     {
-        if ($this->validate()) {
-
             $sql = "INSERT INTO posts (user_id, title, content, creation_date, active)
                     VALUES (:user_id, :title, :content, :creation_date, :active)";
 
@@ -246,7 +200,7 @@ class Post
             $stmt->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
             $stmt->bindValue(':title', $this->title, PDO::PARAM_STR);
             $stmt->bindValue(':content', $this->content, PDO::PARAM_STR);
-            $stmt->bindValue(':active', $this->active, PDO::PARAM_BOOL);
+            $stmt->bindValue(':active', $this->active, PDO::PARAM_STR);
 
             if ($this->creation_date == '') {
                 $stmt->bindValue(':creation_date', null, PDO::PARAM_NULL);
@@ -259,9 +213,6 @@ class Post
                 return true;
             }
 
-        } else {
-            return false;
-        }
     }
 
  

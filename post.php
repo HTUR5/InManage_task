@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 <body>
 
     <header>
-        <h1>My app</h1>
+        <h1 style="color: blue;">My app</h1>
     </header>
 
     <main>
@@ -32,9 +32,14 @@ if (isset($_GET['id'])) {
 <?php if ($post) : ?>
 
     <article>
-        <h2><?= htmlspecialchars($post->title); ?></h2>
-
-        <p><?= htmlspecialchars($post->content); ?></p>
+        <h2>title: <?= htmlspecialchars($post->title); ?></h2>
+        <p>content: <br><?= htmlspecialchars($post->content); ?></p>
+        <ul>
+            <li>post id:<?= htmlspecialchars($post->id); ?></li>
+            <li>user id:<?= htmlspecialchars($post->user_id); ?></li>
+            <li>cration date:<?= htmlspecialchars($post->creation_date); ?></li>
+            <li>active:<?= htmlspecialchars($post->active); ?></li>
+        </ul>
     </article>
 
 <?php else : ?>

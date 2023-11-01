@@ -30,6 +30,12 @@ class User
      */
     public $active;
 
+    /**
+     * The birthday date 
+     * @var datetime
+     */
+    public $birthday;
+
     
     /**
      * Validation errors
@@ -92,60 +98,23 @@ class User
      */
     public function update($conn)
     {
-        // if ($this->validate()) {
             $sql = "UPDATE users
                     SET user_name = :user_name,
                         email = :email,
-                        active = :active
+                        active = :active,
+                        birthday = :birthday
                     WHERE id = :id";
 
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $stmt->bindValue(':active', $this->active, PDO::PARAM_BOOL);
+            $stmt->bindValue(':active', $this->active, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
+             $stmt->bindValue(':birthday', $this->birthday, PDO::PARAM_STR);
 
             return $stmt->execute();
-
-        // } else {
-        //     return false;
-        // }
     }
-
-    // /**
-    //  * Validate the properties, putting any validation error messages in the $errors property
-    //  *
-    //  * @return boolean True if the current properties are valid, false otherwise
-    //  */
-    // protected function validate()
-    // {
-    //     if ($this->title == '') {
-    //         $this->errors[] = 'Title is required';
-    //     }
-    //     if ($this->content == '') {
-    //         $this->errors[] = 'Content is required';
-    //     }
-
-    //     if ($this->creation_date != '') {
-    //         $date_time = date_create_from_format('Y-m-d H:i:s', $this->creation_date);
-            
-    //         if ($date_time === false) {
-
-    //             $this->errors[] = 'Invalid date and time';
-
-    //         } else {
-
-    //             $date_errors = date_get_last_errors();
-
-    //             if ($date_errors['warning_count'] > 0) {
-    //                 $this->errors[] = 'Invalid date and time';
-    //             }
-    //         }
-    //     }
-
-    //     return empty($this->errors);
-    // }
 
     // /**
     //  * Delete the current user
@@ -175,24 +144,25 @@ class User
      */
     public function create($conn)
     {
-        // if ($this->validate()) {
-            $sql = "INSERT INTO users (user_name, email, active)
-                    VALUES (:user_name, :email, :active)";
+            $sql = "INSERT INTO users (user_name, email, active, birthday)
+                    VALUES (:user_name, :email, :active, :birthday)";
 
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(':user_name', $this->user_name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-            $stmt->bindValue(':active', $this->active, PDO::PARAM_BOOL);
+            $stmt->bindValue(':active', $this->active, PDO::PARAM_STR);
+            
+            if ($this->birthday == '') {
+                $stmt->bindValue(':birthday', null, PDO::PARAM_NULL);
+            } else {
+                $stmt->bindValue(':birthday', $this->birthday, PDO::PARAM_STR);
+            }
 
             if ($stmt->execute()) {
                 $this->id = $conn->lastInsertId();
                 return true;
             }
-
-        // } else {
-        //     return false;
-        // }
     }
 
 

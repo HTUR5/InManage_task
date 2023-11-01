@@ -14,7 +14,8 @@ $queryUsers = "CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  active ENUM('yes', 'no') DEFAULT 'yes'
+  active ENUM('yes', 'no') DEFAULT 'yes',
+  birthday DATE NOT NULL
 );";
 
 if ($conn->exec($queryUsers) !== false) {
@@ -40,32 +41,5 @@ if ($conn->exec($queryPosts) !== false) {
     echo "Failed to create Posts table.";
 }
 
-// $post = new Post();
-// $post->user_id = 1;
-// $post->title = 't';
-// $post->content = 'c';
-// $post->creation_date = 'cd';
-// $post->create($conn);
-// $post = Post::getByID($conn,'4');
-// if ( ! $post) {
-//     die("article not found");
-// }
-// $post->title = 't';
-// $post->content = 'c';
-// $post->update($conn);
+require 'upload_image.php';
 
-// $user = new User();
-// $user->user_name = 't';
-// $user->email = 'c';
-// $user->active = False;
-// $user->create($conn);
-// $user = User::getByID($conn,'3');
-// if ( ! $user) {
-//     die("user not found");
-// }
-// $user->active = True;
-// // $user->email = 'qq';
-// // $user->update($conn);
-// $user ->delete($conn);
-$post = Post::getByBirthday($conn);
-var_dump($post);

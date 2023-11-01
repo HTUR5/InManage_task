@@ -31,7 +31,7 @@ $postOfHour = $results->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<h1>Statistics</h1>
+<h1 style="color: blue;">Statistics</h1>
 
 <table>
     <thead>
